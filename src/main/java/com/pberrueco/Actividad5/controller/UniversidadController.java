@@ -1,5 +1,7 @@
 package com.pberrueco.Actividad5.controller;
 
+import com.pberrueco.Actividad5.dto.RequestAddOneDTO;
+import com.pberrueco.Actividad5.model.Alumno;
 import com.pberrueco.Actividad5.model.Universidad;
 import com.pberrueco.Actividad5.service.UniversidadService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +51,14 @@ public class UniversidadController {
     public ResponseEntity<Optional<Universidad>> delete(@PathVariable Long id) {
         universidadService.deleteUniversity(id);
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/addone")
+    public ResponseEntity<Alumno> addone(@RequestBody RequestAddOneDTO requestAddOneDTO) {
+
+        //Llamar al servicio
+        Alumno alumnoCreated = universidadService.addOne(requestAddOneDTO);
+        return ResponseEntity.ok(alumnoCreated);
     }
 
 }
